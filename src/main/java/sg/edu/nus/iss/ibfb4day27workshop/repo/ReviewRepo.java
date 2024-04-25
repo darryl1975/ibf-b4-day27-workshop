@@ -18,9 +18,18 @@ public class ReviewRepo {
     MongoTemplate mt;
 
     // write create review function (using mongotemplate.insert)
+    public Review createReview(Review r) {
+        return mt.insert(r, "reviews");
+    }
 
     // get review by id
-
+    public Review getReviewById(Integer reviewId) {
+        Query query = new Query();
+        query.addCriteria(Criteria.where("_id").is(reviewId));
+        
+        return mt.findOne(query, Review.class);
+    }
+    
     // get review by user
 
 
